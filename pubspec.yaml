@@ -1,7 +1,7 @@
 name: casa_gpt
 description: CasaGPT - Aplicação imobiliária. Frontend em Flutter (Feature-Driven Architecture).
 publish_to: 'none'
-version: 1.0.0+3
+version: 1.0.0+4
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
@@ -26,3 +26,4 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/data/

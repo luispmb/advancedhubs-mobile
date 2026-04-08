@@ -36,8 +36,9 @@ class _FiscalidadeContent extends StatelessWidget {
                         Text(
                           e.value,
                           style: theme.bodyMedium?.copyWith(
-                            fontSize: 14,
+                            fontSize: 15,
                             color: AppColors.darkBlue600,
+                            fontWeight: FontWeight.w700,
                           ),
                         ),
                       ],
@@ -51,15 +52,17 @@ class _FiscalidadeContent extends StatelessWidget {
                     Text(
                       'Total',
                       style: theme.labelLarge?.copyWith(
-                        fontSize: 14,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w700,
                         color: AppColors.darkBlue600,
                       ),
                     ),
                     Text(
                       _MockFiscalidadeData.custosEntradaTotal,
                       style: theme.labelLarge?.copyWith(
-                        fontSize: 15,
-                        color: AppColors.gray1000,
+                        fontSize: 16,
+                        color: AppColors.darkBlue600,
+                        fontWeight: FontWeight.w800,
                       ),
                     ),
                   ],
@@ -71,7 +74,8 @@ class _FiscalidadeContent extends StatelessWidget {
           Text(
             _MockFiscalidadeData.beneficiosTitle,
             style: theme.labelLarge?.copyWith(
-              fontSize: 16,
+              fontSize: 18,
+              fontWeight: FontWeight.w700,
               color: AppColors.darkBlue600,
             ),
           ),
@@ -133,6 +137,7 @@ class _FiscalidadeContent extends StatelessWidget {
                             fontSize: 13,
                             color: AppColors.darkBlue600,
                             decoration: TextDecoration.underline,
+                            fontWeight: FontWeight.w700,
                           ),
                           recognizer: TapGestureRecognizer()..onTap = () {},
                         ),
@@ -143,6 +148,7 @@ class _FiscalidadeContent extends StatelessWidget {
               ],
             ),
           ),
+          const _TabsBottomActionsInline(),
         ],
       ),
     );
@@ -171,7 +177,8 @@ class _FiscalidadeSectionCard extends StatelessWidget {
           Text(
             title,
             style: theme.labelLarge?.copyWith(
-              fontSize: 16,
+              fontSize: 18,
+              fontWeight: FontWeight.w700,
               color: AppColors.darkBlue600,
             ),
           ),
@@ -203,7 +210,7 @@ class _FiscalidadeRow extends StatelessWidget {
           child: Text(
             label,
             style: theme?.bodyMedium?.copyWith(
-              fontSize: 14,
+              fontSize: 15,
               color: AppColors.darkBlue600,
             ),
           ),
@@ -211,8 +218,9 @@ class _FiscalidadeRow extends StatelessWidget {
         Text(
           value,
           style: theme?.bodyMedium?.copyWith(
-            fontSize: 14,
+            fontSize: 16,
             color: AppColors.darkBlue600,
+            fontWeight: FontWeight.w800,
           ),
         ),
       ],
@@ -232,14 +240,18 @@ class _FiscalidadeBeneficioCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: AppColors.successCardBg,
-        border: Border.all(color: AppColors.successCardBorder),
+        color: const Color(0xFFEFFFF8),
+        border: Border.all(color: const Color(0xFF22D3A5)),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(Icons.check_circle_outline, size: 20, color: AppColors.roiGreen),
+          const Icon(
+            Icons.check_circle_outline,
+            size: 20,
+            color: AppColors.roiGreen,
+          ),
           const SizedBox(width: 8),
           Expanded(
             child: Column(
@@ -248,15 +260,16 @@ class _FiscalidadeBeneficioCard extends StatelessWidget {
                 Text(
                   title,
                   style: theme.labelLarge?.copyWith(
-                    fontSize: 14,
-                    color: AppColors.darkBlue600,
+                    fontSize: 16,
+                    color: AppColors.roiGreen,
+                    fontWeight: FontWeight.w800,
                   ),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   text,
                   style: theme.bodyMedium?.copyWith(
-                    fontSize: 13,
+                    fontSize: 14,
                     color: AppColors.gray1000,
                     height: 1.3,
                   ),

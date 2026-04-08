@@ -93,7 +93,7 @@ class _ChatHeader extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'CasaGPT',
+                  l.appBrandName,
                   style: theme.headlineMedium,
                 ),
                 const SizedBox(height: 2),

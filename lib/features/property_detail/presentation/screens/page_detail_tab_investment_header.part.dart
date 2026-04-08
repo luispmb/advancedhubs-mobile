@@ -41,7 +41,7 @@ class _HeroSection extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 12),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(5, (i) => _SliderDot(active: i == 0)),
+            children: List.generate(4, (i) => _SliderDot(active: i == 0)),
           ),
         ),
       ),
@@ -82,11 +82,11 @@ class _SliderDot extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 4),
-      width: active ? 8 : 6.5,
-      height: active ? 8 : 6.5,
+      width: active ? 26 : 10,
+      height: 10,
       decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: active ? AppColors.white : AppColors.white.withValues(alpha: 0.5),
+        borderRadius: BorderRadius.circular(999),
+        color: active ? AppColors.white : AppColors.white.withValues(alpha: 0.45),
       ),
     );
   }
@@ -149,9 +149,9 @@ class _PropertyOverview extends StatelessWidget {
           const SizedBox(height: 16),
           Row(
             children: [
-              _DetailChip(icon: Icons.bed_outlined, label: _MockDetailData.typology),
+              const _DetailChip(icon: Icons.bed_outlined, label: _MockDetailData.typology),
               const SizedBox(width: 16),
-              _DetailChip(icon: Icons.square_foot_outlined, label: _MockDetailData.area),
+              const _DetailChip(icon: Icons.square_foot_outlined, label: _MockDetailData.area),
               const SizedBox(width: 16),
               _DetailChip(
                 icon: Icons.build_outlined,

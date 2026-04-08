@@ -3,8 +3,10 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:casa_gpt/l10n/casa_gpt_localizations.dart';
 
 import 'core/localization/app_locale_controller.dart';
+import 'core/navigation/app_routes.dart';
 import 'core/theme/app_theme.dart';
-import 'features/search/presentation/screens/page_search_list_screen.dart';
+import 'features/onboarding/presentation/screens/onboarding_welcome_screen.dart';
+import 'features/onboarding/presentation/screens/subscription_offer_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +24,7 @@ class CasaGPTApp extends StatelessWidget {
       valueListenable: AppLocaleController.localeNotifier,
       builder: (context, locale, _) {
         return MaterialApp(
-          title: 'CasaGPT',
+          title: 'casanvest.ai',
           debugShowCheckedModeBanner: false,
           theme: AppTheme.light,
           locale: locale,
@@ -33,7 +35,10 @@ class CasaGPTApp extends StatelessWidget {
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          home: const PageSearchListScreen(),
+          home: const OnboardingWelcomeScreen(),
+          routes: {
+            AppRoutes.subscription: (_) => const SubscriptionOfferScreen(),
+          },
         );
       },
     );

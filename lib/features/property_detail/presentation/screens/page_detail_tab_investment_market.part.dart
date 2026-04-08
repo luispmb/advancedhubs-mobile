@@ -19,48 +19,27 @@ class _MarketContent extends StatelessWidget {
             resumo: _MockMarketData.analiseResumo,
           ),
           const SizedBox(height: 16),
-          _MarketSaleEstimateCard(
-            valor: _MockMarketData.estimativaVenda,
-            perM2: _MockMarketData.estimativaPerM2,
+          _MarketSampleCriteriaCard(
+            sampleCount: _MockMarketData.amostra,
+            radius: _MockMarketData.raio,
+            criteriosTipologia: _MockMarketData.criteriosTipologia,
+            criteriosArea: _MockMarketData.criteriosArea,
+            criteriosEstado: _MockMarketData.criteriosEstado,
+            criteriosVendidos: _MockMarketData.criteriosVendidos,
+            dadosRecolhidosHint: _MockMarketData.dadosRecolhidosHint,
+          ),
+          const SizedBox(height: 16),
+          _MarketPostRenovationEstimateCard(
+            estimativaVenda: _MockMarketData.estimativaVenda,
+            estimativaPerM2: _MockMarketData.estimativaPerM2,
             medianaLabel: _MockMarketData.medianaLabel,
-            range: _MockMarketData.rangeEstimado,
+            rangeEstimado: _MockMarketData.rangeEstimado,
+            precoMedio: _MockMarketData.precoMedio,
+            absorcao: _MockMarketData.absorcao,
+            amostra: _MockMarketData.amostra,
+            desconto: _MockMarketData.desconto,
           ),
-          const SizedBox(height: 16),
-          Row(
-            children: [
-              Expanded(
-                child: _InfoCard(
-                  label: 'Preço médio',
-                  value: _MockMarketData.precoMedio,
-                ),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: _InfoCard(
-                  label: 'Absorção',
-                  value: _MockMarketData.absorcao,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          Row(
-            children: [
-              Expanded(
-                child: _InfoCard(
-                  label: 'Amostra',
-                  value: _MockMarketData.amostra,
-                ),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: _InfoCard(
-                  label: 'Desconto',
-                  value: _MockMarketData.desconto,
-                ),
-              ),
-            ],
-          ),
+          const _TabsBottomActionsInline(),
         ],
       ),
     );
@@ -86,110 +65,242 @@ class _MarketPriceAnalysisCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: AppColors.white,
-        borderRadius: BorderRadius.circular(8),
-        border: const Border(
-          bottom: BorderSide(color: AppColors.darkBlue200, width: 0.5),
-        ),
+        borderRadius: BorderRadius.circular(12),
       ),
-      clipBehavior: Clip.antiAlias,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(12),
-            child: Row(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Row(
               children: [
-                const Icon(Icons.analytics_outlined, size: 18, color: AppColors.darkBlue600),
-                const SizedBox(width: 4),
+                Container(
+                  width: 28,
+                  height: 28,
+                  decoration: BoxDecoration(
+                    color: AppColors.purple200,
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: const Center(
+                    child: Icon(
+                      Icons.info_outline,
+                      size: 18,
+                      color: AppColors.purple600,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10),
                 Text(
                   'Análise de Preço',
-                  style: theme.labelLarge?.copyWith(
-                    fontSize: 14,
+                  style: theme.titleLarge?.copyWith(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w800,
                     color: AppColors.darkBlue600,
                   ),
                 ),
               ],
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            const SizedBox(height: 16),
+            Row(
               children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Preço pedido',
-                            style: theme.labelLarge?.copyWith(
-                              fontSize: 12,
-                              color: AppColors.gray1000,
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            precoPedido,
-                            style: theme.headlineMedium?.copyWith(
-                              fontSize: 18,
-                              color: AppColors.darkBlue600,
-                            ),
-                          ),
-                        ],
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Preço Pedido',
+                        style: theme.bodySmall?.copyWith(
+                          fontSize: 14,
+                          color: AppColors.gray900,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
-                    ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Média zona',
-                            style: theme.labelLarge?.copyWith(
-                              fontSize: 12,
-                              color: AppColors.gray1000,
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            mediaZona,
-                            style: theme.headlineMedium?.copyWith(
-                              fontSize: 18,
-                              color: AppColors.darkBlue600,
-                            ),
-                          ),
-                        ],
+                      const SizedBox(height: 6),
+                      Text(
+                        precoPedido,
+                        style: theme.headlineMedium?.copyWith(
+                          fontSize: 26,
+                          color: AppColors.darkBlue600,
+                          fontWeight: FontWeight.w800,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 12),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4.5),
-                  decoration: BoxDecoration(
-                    color: AppColors.roiGreenBg,
-                    border: Border.all(color: AppColors.roiGreenBorder),
-                    borderRadius: BorderRadius.circular(4.5),
-                  ),
-                  child: Text(
-                    badge,
-                    style: theme.labelLarge?.copyWith(
-                      fontSize: 11,
-                      color: AppColors.roiGreen,
-                    ),
+                    ],
                   ),
                 ),
-                const SizedBox(height: 8),
-                Text(
-                  resumo,
-                  style: theme.bodyMedium?.copyWith(
-                    fontSize: 13,
-                    color: AppColors.gray1000,
-                    height: 1.3,
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Média Zona',
+                        style: theme.bodySmall?.copyWith(
+                          fontSize: 14,
+                          color: AppColors.gray900,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        mediaZona,
+                        style: theme.headlineMedium?.copyWith(
+                          fontSize: 26,
+                          color: AppColors.darkBlue600,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
+            ),
+            const SizedBox(height: 12),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                decoration: BoxDecoration(
+                  color: AppColors.roiGreenBg,
+                  border: Border.all(color: AppColors.roiGreenBorder),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Text(
+                  badge,
+                  style: theme.bodySmall?.copyWith(
+                    fontSize: 14,
+                    color: AppColors.roiGreen,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 14),
+            Text(
+              resumo,
+              style: theme.bodyMedium?.copyWith(
+                fontSize: 15,
+                color: AppColors.gray1000,
+                height: 1.35,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _MarketSampleCriteriaCard extends StatelessWidget {
+  const _MarketSampleCriteriaCard({
+    required this.sampleCount,
+    required this.radius,
+    required this.criteriosTipologia,
+    required this.criteriosArea,
+    required this.criteriosEstado,
+    required this.criteriosVendidos,
+    required this.dadosRecolhidosHint,
+  });
+
+  final String sampleCount;
+  final String radius;
+  final String criteriosTipologia;
+  final String criteriosArea;
+  final String criteriosEstado;
+  final String criteriosVendidos;
+  final String dadosRecolhidosHint;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context).textTheme;
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.white,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 28,
+                height: 28,
+                decoration: BoxDecoration(
+                  color: AppColors.purple200,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: const Center(
+                  child: Icon(
+                    Icons.tune_outlined,
+                    size: 18,
+                    color: AppColors.purple600,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 10),
+              Text(
+                _MockMarketData.amostraUtilizadaTitle,
+                style: theme.titleLarge?.copyWith(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w800,
+                  color: AppColors.darkBlue600,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              Expanded(
+                child: _MarketStatBox(
+                  value: sampleCount,
+                  label: _MockMarketData.amostraCountLabel,
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: _MarketStatBox(
+                  value: radius,
+                  label: _MockMarketData.radiusLabel,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          Container(
+            padding: const EdgeInsets.fromLTRB(14, 12, 14, 14),
+            decoration: BoxDecoration(
+              color: AppColors.neutralLightGrey,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  _MockMarketData.criteriosTitle,
+                  style: theme.bodyMedium?.copyWith(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w800,
+                    color: AppColors.gray1000,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                _CriteriaLine(text: criteriosTipologia),
+                _CriteriaLine(text: criteriosArea),
+                _CriteriaLine(text: criteriosEstado),
+                _CriteriaLine(text: criteriosVendidos),
+              ],
+            ),
+          ),
+          const SizedBox(height: 12),
+          Text(
+            dadosRecolhidosHint,
+            style: theme.bodySmall?.copyWith(
+              fontSize: 13,
+              color: AppColors.gray900.withValues(alpha: 0.75),
             ),
           ),
         ],
@@ -198,112 +309,268 @@ class _MarketPriceAnalysisCard extends StatelessWidget {
   }
 }
 
-class _MarketSaleEstimateCard extends StatelessWidget {
-  const _MarketSaleEstimateCard({
-    required this.valor,
-    required this.perM2,
-    required this.medianaLabel,
-    required this.range,
-  });
+class _MarketStatBox extends StatelessWidget {
+  const _MarketStatBox({required this.value, required this.label});
 
-  final String valor;
-  final String perM2;
-  final String medianaLabel;
-  final String range;
+  final String value;
+  final String label;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).textTheme;
     return Container(
+      padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(8),
-        border: const Border(
-          bottom: BorderSide(color: AppColors.darkBlue200, width: 0.5),
-        ),
+        color: AppColors.purple200.withValues(alpha: 0.45),
+        borderRadius: BorderRadius.circular(12),
       ),
-      clipBehavior: Clip.antiAlias,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(12),
-            child: Row(
-              children: [
-                const Icon(Icons.sell_outlined, size: 18, color: AppColors.darkBlue600),
-                const SizedBox(width: 4),
-                Text(
-                  'Estimativa de Venda Pós-renovação',
-                  style: theme.labelLarge?.copyWith(
-                    fontSize: 14,
-                    color: AppColors.darkBlue600,
-                  ),
-                ),
-              ],
+          Text(
+            value,
+            style: theme.headlineMedium?.copyWith(
+              fontSize: 22,
+              fontWeight: FontWeight.w800,
+              color: AppColors.darkBlue600,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.baseline,
-                  textBaseline: TextBaseline.alphabetic,
+          const SizedBox(height: 6),
+          Text(
+            label,
+            style: theme.bodySmall?.copyWith(
+              fontSize: 14,
+              color: AppColors.gray900,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _CriteriaLine extends StatelessWidget {
+  const _CriteriaLine({required this.text});
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context).textTheme;
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Icon(Icons.check, size: 20, color: AppColors.roiGreen),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              text,
+              style: theme.bodyMedium?.copyWith(
+                fontSize: 15,
+                color: AppColors.gray1000,
+                height: 1.25,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _MarketPostRenovationEstimateCard extends StatelessWidget {
+  const _MarketPostRenovationEstimateCard({
+    required this.estimativaVenda,
+    required this.estimativaPerM2,
+    required this.medianaLabel,
+    required this.rangeEstimado,
+    required this.precoMedio,
+    required this.absorcao,
+    required this.amostra,
+    required this.desconto,
+  });
+
+  final String estimativaVenda;
+  final String estimativaPerM2;
+  final String medianaLabel;
+  final String rangeEstimado;
+  final String precoMedio;
+  final String absorcao;
+  final String amostra;
+  final String desconto;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context).textTheme;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            color: AppColors.white,
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 14, 16, 12),
+                child: Row(
                   children: [
-                    Text(
-                      valor,
-                      style: theme.headlineMedium?.copyWith(
-                        fontSize: 24,
-                        color: AppColors.darkBlue600,
-                      ),
+                    const Icon(
+                      Icons.sell_outlined,
+                      size: 22,
+                      color: AppColors.purple600,
                     ),
-                    const SizedBox(width: 4),
-                    Text(
-                      perM2,
-                      style: theme.bodyMedium?.copyWith(
-                        fontSize: 14,
-                        color: AppColors.darkBlue600,
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Text(
+                        'Estimativa de Venda Pós-renovação',
+                        style: theme.titleLarge?.copyWith(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w800,
+                          color: AppColors.darkBlue600,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 4),
-                Text(
-                  medianaLabel,
-                  style: theme.bodyMedium?.copyWith(
-                    fontSize: 12,
-                    color: AppColors.gray1000,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: AppColors.purple100,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Range Estimado',
-                        style: theme.labelLarge?.copyWith(
-                          fontSize: 12,
-                          color: AppColors.gray1000,
+              ),
+              const Divider(height: 1, color: AppColors.gray600),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 14, 16, 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          estimativaVenda,
+                          style: theme.headlineMedium?.copyWith(
+                            fontSize: 46 / 2,
+                            color: AppColors.darkBlue600,
+                            fontWeight: FontWeight.w800,
+                          ),
                         ),
-                      ),
-                      Text(
-                        range,
-                        style: theme.labelLarge?.copyWith(
-                          fontSize: 14,
-                          color: AppColors.darkBlue600,
+                        const SizedBox(width: 8),
+                        Text(
+                          estimativaPerM2.replaceFirst('/', '').trim(),
+                          style: theme.bodyMedium?.copyWith(
+                            fontSize: 24 / 2,
+                            color: AppColors.darkBlue600,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
+                      ],
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      medianaLabel,
+                      textAlign: TextAlign.center,
+                      style: theme.bodyMedium?.copyWith(
+                        fontSize: 14,
+                        color: AppColors.gray1000,
+                        fontWeight: FontWeight.w600,
                       ),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(height: 12),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                      decoration: BoxDecoration(
+                        color: AppColors.neutralLightGrey,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Row(
+                        children: [
+                          Text(
+                            'Range Estimado',
+                            style: theme.bodyMedium?.copyWith(
+                              fontSize: 15,
+                              color: AppColors.gray1000,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          const Spacer(),
+                          Text(
+                            rangeEstimado,
+                            style: theme.bodyMedium?.copyWith(
+                              fontSize: 17,
+                              color: AppColors.darkBlue600,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 12),
+        Row(
+          children: [
+            Expanded(child: _MarketStatTile(title: 'Preço médio', value: precoMedio)),
+            const SizedBox(width: 10),
+            Expanded(child: _MarketStatTile(title: 'Tempo de Absorção', value: absorcao)),
+          ],
+        ),
+        const SizedBox(height: 10),
+        Row(
+          children: [
+            Expanded(child: _MarketStatTile(title: 'Amostra', value: amostra)),
+            const SizedBox(width: 10),
+            Expanded(child: _MarketStatTile(title: 'Desconto', value: desconto)),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _MarketStatTile extends StatelessWidget {
+  const _MarketStatTile({required this.title, required this.value});
+
+  final String title;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context).textTheme;
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+      decoration: BoxDecoration(
+        color: AppColors.white,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: AppColors.gray600),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: theme.bodySmall?.copyWith(
+              fontSize: 14,
+              color: AppColors.gray1000,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            value,
+            style: theme.headlineMedium?.copyWith(
+              fontSize: 48 / 2,
+              color: AppColors.darkBlue600,
+              fontWeight: FontWeight.w800,
+              letterSpacing: 0,
+              height: 1.05,
             ),
           ),
         ],

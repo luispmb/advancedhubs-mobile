@@ -28,8 +28,9 @@ class LoginScreen extends StatelessWidget {
               Text(
                 l.loginTitle,
                 style: theme.headlineMedium?.copyWith(
-                  fontSize: 44 / 3,
+                  fontSize: 28,
                   fontWeight: FontWeight.w800,
+                  height: 1.15,
                 ),
               ),
               const SizedBox(height: 4),
@@ -93,8 +94,8 @@ class LoginScreen extends StatelessWidget {
                     l.logIn,
                     style: theme.labelLarge?.copyWith(
                       color: AppColors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700,
+                      fontSize: 17,
+                      fontWeight: FontWeight.w800,
                     ),
                   ),
                 ),
@@ -160,9 +161,9 @@ class LoginScreen extends StatelessWidget {
                     child: Text(
                       l.createAccount,
                       style: theme.bodyMedium?.copyWith(
-                        fontSize: 14,
+                        fontSize: 17,
                         color: AppColors.darkBlue800,
-                        fontWeight: FontWeight.w700,
+                        fontWeight: FontWeight.w800,
                       ),
                     ),
                   ),

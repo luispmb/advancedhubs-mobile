@@ -4,7 +4,7 @@ part of 'page_detail_tab_investment_screen.dart';
 class _MockDetailData {
   static const String title = 'Apartamento T2';
   static const String price = '195.000€';
-  static const String roiPercent = '+6%';
+  static const String roiPercent = '+6.6%';
   static const String location = 'Caldas da Rainha, Leiria';
   static const String typology = 'T2';
   static const String area = '66m²';
@@ -14,14 +14,21 @@ class _MockDetailData {
   static const String purchasePrice = '195.000€';
   static const String totalCost = '238.800€';
   static const String estimatedSale = '252.700€';
+  static const String estimatedSaleTime = '~2-3m';
   static const String expectedRoi = '+6%';
+  static const String projectVisionTitle = 'Visão do Projeto';
+  static const String projectVisionText =
+      'Apartamento renovado no coração de Leiria, com forte potencial para jovens casais e famílias pequenas. Este T2 oferece uma oportunidade sólida de renovação com margens confortáveis. A localização central e o tamanho (98m²) tornam-no ideal para o público-alvo principal: jovens casais e famílias pequenas que procuram proximidade a serviços, boa relação qualidade-preço e um espaço pronto para viver ou investir.';
   static const String capitalTotal = '238.800€';
   static const String disclaimer =
       'Pressupostos: obras a 280€/m², venda baseada em 17 comparáveis T2 renovados.';
   static const List<CapitalSegment> capitalSegments = [
-    CapitalSegment(label: 'Compra 195k (82%)', percent: 0.82, color: AppColors.purple600),
-    CapitalSegment(label: 'Obras 38k (16%)', percent: 0.16, color: AppColors.teal600),
-    CapitalSegment(label: 'Taxas 5.8k (2%)', percent: 0.02, color: AppColors.darkBlue800),
+    CapitalSegment(
+        label: 'Compra 195k (82%)', percent: 0.82, color: AppColors.purple600),
+    CapitalSegment(
+        label: 'Obras 38k (16%)', percent: 0.16, color: AppColors.teal600),
+    CapitalSegment(
+        label: 'Taxas 5.8k (2%)', percent: 0.02, color: AppColors.darkBlue800),
   ];
 }
 
@@ -40,6 +47,19 @@ class _MockMarketData {
   static const String absorcao = '104 dias';
   static const String amostra = '17';
   static const String desconto = '-13%';
+
+  // UI do tab Mercado (mock) — valores iguais ao screenshot.
+  static const String amostraUtilizadaTitle = 'Amostra Utilizada';
+  static const String amostraCountLabel = 'Imóveis';
+  static const String radiusLabel = 'Raio';
+  static const String raio = '2 km';
+  static const String criteriosTitle = 'Critérios de Filtragem';
+  static const String criteriosTipologia = 'Tipologia T2 (2 quartos)';
+  static const String criteriosArea = 'Área entre 80-110 m²';
+  static const String criteriosEstado = 'Estado: Renovado ou Bom Estado';
+  static const String criteriosVendidos = 'Vendidos nos últimos 12 meses';
+  static const String dadosRecolhidosHint =
+      'Dados recolhidos de registos públicos, portais e bases de dados.';
 }
 
 /// Dados mock do tab Obras / Renovations (substituir por domínio/API).
@@ -49,17 +69,29 @@ class _MockRenovationsData {
   static const String totalEstimado = '33.280 – 59.060€';
   static const String verGuiaLabel = 'Ver Guia de Acabamentos';
   static const String disclaimer =
-      'Valores médios para Leiria. Base 280€/m² assume intervenção parcial. Orçamento real varia conforme estado do imóvel.';
+      'Valores médios para Leiria. Base 280€/m² assume intervenção parcial. '
+      'Orçamento real varia conforme estado do imóvel.';
 
   static const List<_RenovationGroup> softCosts = [
     _RenovationGroup(
       title: 'Projetos & Licenças',
       totalRange: '3.500 - 5.000€',
-      icon: Icons.square_foot,
+      iconData: Icons.square_foot,
       items: [
         _RenovationLineItem('Projeto de Arquitetura', '1.500 – 2.500€'),
         _RenovationLineItem('Projeto Especialidades', '800 – 1.200€'),
         _RenovationLineItem('Taxas Municipais', '1.200 – 1.300€'),
+      ],
+    ),
+    _RenovationGroup(
+      title: 'Legal Costs',
+      totalRange: '1.200 - 2.000€',
+      iconAssetPath: 'assets/images/Icon-3.png',
+      initiallyExpanded: true,
+      items: [
+        _RenovationLineItem('Escritura de Compra', '500 – 800€'),
+        _RenovationLineItem('Registo Predial', '300 – 500€'),
+        _RenovationLineItem('Advogado (due diligence)', '400 – 700€'),
       ],
     ),
   ];
@@ -68,7 +100,7 @@ class _MockRenovationsData {
     _RenovationGroup(
       title: 'Estrutural',
       totalRange: '10.000 - 16.000€',
-      icon: Icons.build,
+      iconAssetPath: 'assets/images/handyman.png',
       items: [
         _RenovationLineItem('Cobertura e Impermeabilização', '6.500 – 9.500€'),
         _RenovationLineItem('Caixilharia e Janelas', '3.500 – 6.500€'),
@@ -77,7 +109,7 @@ class _MockRenovationsData {
     _RenovationGroup(
       title: 'Instalações',
       totalRange: '7.840 - 13.720€',
-      icon: Icons.lightbulb_outline,
+      iconAssetPath: 'assets/images/Icon-2.png',
       items: [
         _RenovationLineItem('Elétrica Completa', '4.410 – 7.840€'),
         _RenovationLineItem('Canalização e AVAC', '3.430 – 5.880€'),
@@ -86,7 +118,7 @@ class _MockRenovationsData {
     _RenovationGroup(
       title: 'Acabamentos',
       totalRange: '7.840 - 13.720€',
-      icon: Icons.format_paint,
+      iconAssetPath: 'assets/images/Icon.png',
       items: [
         _RenovationLineItem('Revestimentos', '2.940 – 7.840€'),
         _RenovationLineItem('Cozinha Equipada', '5.000 – 8.000€'),
@@ -138,7 +170,7 @@ class _MockFiscalidadeData {
   static const String maisValiasLabel = 'Mais-valias (pessoa singular)';
   static const String maisValiasValue = '28%';
   static const String ircLabel = 'IRC (pessoa coletiva)';
-  static const String ircValue = '21%';
+  static const String ircValue = '19%';
   static const String warningText =
       'Isenção parcial de mais-valias se reinvestimento em HPP declarado no mesmo ano fiscal. ';
   static const String warningLink = 'Ver condições e requisitos';
@@ -160,12 +192,16 @@ class _RenovationGroup {
   const _RenovationGroup({
     required this.title,
     required this.totalRange,
-    required this.icon,
+    this.iconData,
+    this.iconAssetPath,
+    this.initiallyExpanded = false,
     required this.items,
   });
   final String title;
   final String totalRange;
-  final IconData icon;
+  final IconData? iconData;
+  final String? iconAssetPath;
+  final bool initiallyExpanded;
   final List<_RenovationLineItem> items;
 }
 

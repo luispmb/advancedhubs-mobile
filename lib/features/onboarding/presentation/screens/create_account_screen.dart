@@ -32,8 +32,9 @@ class CreateAccountScreen extends StatelessWidget {
               Text(
                 l.createAccountTitle,
                 style: theme.headlineMedium?.copyWith(
-                  fontSize: 44 / 3,
+                  fontSize: 28,
                   fontWeight: FontWeight.w800,
+                  height: 1.15,
                 ),
               ),
               const SizedBox(height: 4),
@@ -102,8 +103,8 @@ class CreateAccountScreen extends StatelessWidget {
                     l.createAccount,
                     style: theme.labelLarge?.copyWith(
                       color: AppColors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700,
+                      fontSize: 17,
+                      fontWeight: FontWeight.w800,
                     ),
                   ),
                 ),
@@ -145,8 +146,8 @@ class CreateAccountScreen extends StatelessWidget {
                     child: Text(
                       l.logInLink,
                       style: theme.bodyMedium?.copyWith(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
+                        fontSize: 17,
+                        fontWeight: FontWeight.w800,
                         color: AppColors.darkBlue800,
                       ),
                     ),

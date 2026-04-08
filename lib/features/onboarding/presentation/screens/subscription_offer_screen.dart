@@ -104,7 +104,8 @@ class _SubscriptionOfferScreenState extends State<SubscriptionOfferScreen> {
                 onTap: () {
                   Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute<void>(
-                      builder: (_) => const PageSearchListScreen(),
+                      builder: (_) =>
+                          const PageSearchListScreen(showTrialBanner: true),
                     ),
                     (route) => false,
                   );

@@ -66,7 +66,7 @@ class PropertyCard extends StatelessWidget {
           onTap: onTap,
           borderRadius: BorderRadius.circular(8),
           child: Padding(
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.fromLTRB(12, 12, 12, 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
@@ -89,18 +89,27 @@ class PropertyCard extends StatelessWidget {
                 const SizedBox(height: 8),
                 Row(
                   children: [
-                    Flexible(
-                      child: Text(
-                        item.price,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: theme.bodyMedium?.copyWith(
-                          fontSize: 22,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.darkBlue600,
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: FittedBox(
+                          fit: BoxFit.scaleDown,
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            item.price,
+                            maxLines: 1,
+                            style: theme.headlineMedium?.copyWith(
+                              fontSize: 22,
+                              fontWeight: FontWeight.w800,
+                              color: AppColors.darkBlue600,
+                              height: 1.05,
+                            ),
+                          ),
                         ),
                       ),
                     ),
+                    const SizedBox(width: 10),
+                    const _TimeBadge(),
                     const SizedBox(width: 8),
                     _RoiBadge(roiPercent: item.roiPercent),
                   ],
@@ -210,6 +219,12 @@ class _PropertyImage extends StatelessWidget {
               ),
             ),
           ),
+          const Positioned(
+            left: 0,
+            right: 0,
+            bottom: 10,
+            child: _ImageSliderIndicator(),
+          ),
         ],
       ),
     );
@@ -222,6 +237,37 @@ class _PropertyImage extends StatelessWidget {
   }
 }
 
+class _ImageSliderIndicator extends StatelessWidget {
+  const _ImageSliderIndicator();
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: List.generate(4, (i) => _ImageSliderDot(active: i == 0)),
+    );
+  }
+}
+
+class _ImageSliderDot extends StatelessWidget {
+  const _ImageSliderDot({required this.active});
+
+  final bool active;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 4),
+      width: active ? 26 : 10,
+      height: 10,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(999),
+        color: active ? AppColors.white : AppColors.white.withValues(alpha: 0.45),
+      ),
+    );
+  }
+}
+
 class _RoiBadge extends StatelessWidget {
   const _RoiBadge({required this.roiPercent});
 
@@ -230,30 +276,63 @@ class _RoiBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
         color: AppColors.roiGreenBg,
         border: Border.all(color: AppColors.roiGreenBorder),
-        borderRadius: BorderRadius.circular(4),
+        borderRadius: BorderRadius.circular(6),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            'ROI',
-            style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                  fontSize: 14,
-                  color: AppColors.roiGreen,
-                ),
-          ),
-          const SizedBox(width: 4),
-          Text(
             roiPercent,
             style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                  fontSize: 14,
+                  fontSize: 16,
                   fontWeight: FontWeight.w800,
                   color: AppColors.roiGreen,
                 ),
+          ),
+          const SizedBox(width: 6),
+          Icon(
+            Icons.info_outline,
+            size: 16,
+            color: AppColors.roiGreen.withValues(alpha: 0.9),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _TimeBadge extends StatelessWidget {
+  const _TimeBadge();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      decoration: BoxDecoration(
+        color: AppColors.neutralLightGrey,
+        border: Border.all(color: AppColors.darkBlue200),
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            '10m',
+            style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.darkBlue600,
+                ),
+          ),
+          const SizedBox(width: 6),
+          Icon(
+            Icons.info_outline,
+            size: 15,
+            color: AppColors.gray900.withValues(alpha: 0.7),
           ),
         ],
       ),

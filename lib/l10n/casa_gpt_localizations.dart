@@ -129,6 +129,12 @@ abstract class CasaGptLocalizations {
   /// **'Ajuda'**
   String get drawerHelp;
 
+  /// No description provided for @appBrandName.
+  ///
+  /// In pt, this message translates to:
+  /// **'casanvest.ai'**
+  String get appBrandName;
+
   /// No description provided for @languageLabelEnglish.
   ///
   /// In pt, this message translates to:
@@ -147,11 +153,23 @@ abstract class CasaGptLocalizations {
   /// **'Pesquisar imóveis'**
   String get searchPropertiesPlaceholder;
 
+  /// No description provided for @searchLocationPlaceholder.
+  ///
+  /// In pt, this message translates to:
+  /// **'Pesquisar localização...'**
+  String get searchLocationPlaceholder;
+
   /// No description provided for @topDeals.
   ///
   /// In pt, this message translates to:
   /// **'Top Deals'**
   String get topDeals;
+
+  /// No description provided for @topDealsForYou.
+  ///
+  /// In pt, this message translates to:
+  /// **'Top deals para si'**
+  String get topDealsForYou;
 
   /// No description provided for @viewAll.
   ///
@@ -483,6 +501,24 @@ abstract class CasaGptLocalizations {
   /// **'Continuar com trial gratuito de 7 dias'**
   String get continueTrial;
 
+  /// No description provided for @trialBannerLine1a.
+  ///
+  /// In pt, this message translates to:
+  /// **'O teu trial acaba em '**
+  String get trialBannerLine1a;
+
+  /// No description provided for @trialBannerLine1b.
+  ///
+  /// In pt, this message translates to:
+  /// **'7 dias.'**
+  String get trialBannerLine1b;
+
+  /// No description provided for @trialBannerLine2.
+  ///
+  /// In pt, this message translates to:
+  /// **'Subscreve agora, só cobrado no fim.'**
+  String get trialBannerLine2;
+
   /// No description provided for @legalConsent.
   ///
   /// In pt, this message translates to:
@@ -660,7 +696,7 @@ abstract class CasaGptLocalizations {
   /// No description provided for @chatDisclaimerCasaGpt.
   ///
   /// In pt, this message translates to:
-  /// **'A CasaGPT pode cometer erros. Valide a informação.'**
+  /// **'A casanvest.ai pode cometer erros. Valide a informação.'**
   String get chatDisclaimerCasaGpt;
 
   /// No description provided for @chatDemoReply.
@@ -668,6 +704,12 @@ abstract class CasaGptLocalizations {
   /// In pt, this message translates to:
   /// **'Boa pergunta 👀\nAinda estou em modo demo visual, sem backend ligado.'**
   String get chatDemoReply;
+
+  /// No description provided for @searchResultsFormatted.
+  ///
+  /// In pt, this message translates to:
+  /// **'{count} resultados'**
+  String searchResultsFormatted(int count);
 }
 
 class _CasaGptLocalizationsDelegate

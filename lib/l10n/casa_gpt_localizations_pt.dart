@@ -24,6 +24,9 @@ class CasaGptLocalizationsPt extends CasaGptLocalizations {
   String get drawerHelp => 'Ajuda';
 
   @override
+  String get appBrandName => 'casanvest.ai';
+
+  @override
   String get languageLabelEnglish => 'English';
 
   @override
@@ -33,7 +36,13 @@ class CasaGptLocalizationsPt extends CasaGptLocalizations {
   String get searchPropertiesPlaceholder => 'Pesquisar imóveis';
 
   @override
+  String get searchLocationPlaceholder => 'Pesquisar localização...';
+
+  @override
   String get topDeals => 'Top Deals';
+
+  @override
+  String get topDealsForYou => 'Top deals para si';
 
   @override
   String get viewAll => 'Ver todos';
@@ -203,6 +212,15 @@ class CasaGptLocalizationsPt extends CasaGptLocalizations {
   String get continueTrial => 'Continuar com trial gratuito de 7 dias';
 
   @override
+  String get trialBannerLine1a => 'O teu trial acaba em ';
+
+  @override
+  String get trialBannerLine1b => '7 dias.';
+
+  @override
+  String get trialBannerLine2 => 'Subscreve agora, só cobrado no fim.';
+
+  @override
   String get legalConsent =>
       'Ao continuar, aceitas a Política de\nPrivacidade e os Termos & Condições.';
 
@@ -296,9 +314,14 @@ class CasaGptLocalizationsPt extends CasaGptLocalizations {
 
   @override
   String get chatDisclaimerCasaGpt =>
-      'A CasaGPT pode cometer erros. Valide a informação.';
+      'A casanvest.ai pode cometer erros. Valide a informação.';
 
   @override
   String get chatDemoReply =>
       'Boa pergunta 👀\nAinda estou em modo demo visual, sem backend ligado.';
+
+  @override
+  String searchResultsFormatted(int count) {
+    return '$count resultados';
+  }
 }

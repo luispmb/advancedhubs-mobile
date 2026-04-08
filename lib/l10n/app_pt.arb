@@ -5,10 +5,13 @@
   "drawerFavorites": "Favoritos",
   "drawerMyAccount": "A minha conta",
   "drawerHelp": "Ajuda",
+  "appBrandName": "casanvest.ai",
   "languageLabelEnglish": "English",
   "languageLabelPortuguese": "Português",
   "searchPropertiesPlaceholder": "Pesquisar imóveis",
+  "searchLocationPlaceholder": "Pesquisar localização...",
   "topDeals": "Top Deals",
+  "topDealsForYou": "Top deals para si",
   "viewAll": "Ver todos",
   "properties": "Propriedades",
   "listTab": "Lista",
@@ -64,6 +67,9 @@
   "subscribe": "Subscrever",
   "subscribeNow": "Subscrever agora",
   "continueTrial": "Continuar com trial gratuito de 7 dias",
+  "trialBannerLine1a": "O teu trial acaba em ",
+  "trialBannerLine1b": "7 dias.",
+  "trialBannerLine2": "Subscreve agora, só cobrado no fim.",
   "legalConsent": "Ao continuar, aceitas a Política de\nPrivacidade e os Termos & Condições.",
   "legalConsentAlt": "Ao continuar, aceitas a Política de Privacidade e\nos Termos & Condições.",
   "trialEnds5Days": "O teu trial acaba em 5 dias.\nSubscreve agora, só cobrado no fim.",
@@ -93,6 +99,14 @@
   "chatSuggestionRoi": "Porquê ROI positivo aqui?",
   "askAnything": "Pergunte-me algo",
   "chatDisclaimerCasanvest": "A Casanvest.ai pode cometer erros. Valide a informação.",
-  "chatDisclaimerCasaGpt": "A CasaGPT pode cometer erros. Valide a informação.",
-  "chatDemoReply": "Boa pergunta 👀\nAinda estou em modo demo visual, sem backend ligado."
+  "chatDisclaimerCasaGpt": "A casanvest.ai pode cometer erros. Valide a informação.",
+  "chatDemoReply": "Boa pergunta 👀\nAinda estou em modo demo visual, sem backend ligado.",
+  "searchResultsFormatted": "{count} resultados",
+  "@searchResultsFormatted": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

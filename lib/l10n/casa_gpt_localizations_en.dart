@@ -24,6 +24,9 @@ class CasaGptLocalizationsEn extends CasaGptLocalizations {
   String get drawerHelp => 'Help';
 
   @override
+  String get appBrandName => 'casanvest.ai';
+
+  @override
   String get languageLabelEnglish => 'English';
 
   @override
@@ -33,7 +36,13 @@ class CasaGptLocalizationsEn extends CasaGptLocalizations {
   String get searchPropertiesPlaceholder => 'Search properties';
 
   @override
+  String get searchLocationPlaceholder => 'Search location...';
+
+  @override
   String get topDeals => 'Top Deals';
+
+  @override
+  String get topDealsForYou => 'Top deals for you';
 
   @override
   String get viewAll => 'View all';
@@ -203,6 +212,15 @@ class CasaGptLocalizationsEn extends CasaGptLocalizations {
   String get continueTrial => 'Continue with 7-day free trial';
 
   @override
+  String get trialBannerLine1a => 'Your trial ends in ';
+
+  @override
+  String get trialBannerLine1b => '7 days.';
+
+  @override
+  String get trialBannerLine2 => 'Subscribe now — charged only at the end.';
+
+  @override
   String get legalConsent =>
       'By continuing, you agree to the Privacy Policy and Terms & Conditions.';
 
@@ -296,9 +314,14 @@ class CasaGptLocalizationsEn extends CasaGptLocalizations {
 
   @override
   String get chatDisclaimerCasaGpt =>
-      'CasaGPT may make mistakes. Please verify the information.';
+      'casanvest.ai may make mistakes. Please verify the information.';
 
   @override
   String get chatDemoReply =>
       'Good question 👀\nI am still in a visual demo mode, with no backend connected.';
+
+  @override
+  String searchResultsFormatted(int count) {
+    return '$count results';
+  }
 }

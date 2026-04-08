@@ -4,6 +4,36 @@ import 'package:casa_gpt/l10n/casa_gpt_localizations.dart';
 
 import '../../../../core/localization/app_localizations.dart';
 import '../../../../core/theme/app_theme.dart';
+import '../../domain/search_radius.dart';
+
+/// Devolvido por [FiltersSheet] ao confirmar com "Aplicar Filtros".
+class AppliedSearchFilters {
+  const AppliedSearchFilters({
+    required this.locationLabel,
+    required this.radiusLabel,
+    required this.activeFilterCount,
+    this.resultsCount = 43,
+  });
+
+  final String locationLabel;
+  final String radiusLabel;
+  final int activeFilterCount;
+  final int resultsCount;
+
+  AppliedSearchFilters copyWith({
+    String? locationLabel,
+    String? radiusLabel,
+    int? activeFilterCount,
+    int? resultsCount,
+  }) {
+    return AppliedSearchFilters(
+      locationLabel: locationLabel ?? this.locationLabel,
+      radiusLabel: radiusLabel ?? this.radiusLabel,
+      activeFilterCount: activeFilterCount ?? this.activeFilterCount,
+      resultsCount: resultsCount ?? this.resultsCount,
+    );
+  }
+}
 
 /// Track shape que desenha a linha do slider à largura total, alinhada às extremidades do histograma.
 class _FullWidthRangeSliderTrackShape extends RoundedRectRangeSliderTrackShape {
@@ -30,7 +60,13 @@ class _FullWidthRangeSliderTrackShape extends RoundedRectRangeSliderTrackShape {
 
 /// Modal de Filtros: ROI, Localização, Preço, Tipologia, Área, Tipo de Negócio.
 class FiltersSheet extends StatefulWidget {
-  const FiltersSheet({super.key});
+  const FiltersSheet({super.key, this.initial, this.onCleared});
+
+  /// Estado aplicado anteriormente (reabrir o sheet com os mesmos valores).
+  final AppliedSearchFilters? initial;
+
+  /// Chamado ao tocar em «Limpar» para repor o ecrã de pesquisa ao estado sem filtros aplicados.
+  final VoidCallback? onCleared;
 
   @override
   State<FiltersSheet> createState() => _FiltersSheetState();
@@ -38,13 +74,26 @@ class FiltersSheet extends StatefulWidget {
 
 class _FiltersSheetState extends State<FiltersSheet> {
   double _roiValue = 5;
-  final _locationController = TextEditingController(text: 'Leiria, Portugal');
+  late final TextEditingController _locationController;
   double _priceMin = 30000;
   double _priceMax = 400000;
   int? _selectedTipologia;
   final _areaMinController = TextEditingController(text: '130');
   final _areaMaxController = TextEditingController(text: '250');
   bool _fixAndFlip = true;
+  String _radiusLabel = '5 km';
+
+  @override
+  void initState() {
+    super.initState();
+    final i = widget.initial;
+    _locationController = TextEditingController(
+      text: i != null ? i.locationLabel : 'Leiria, Portugal',
+    );
+    if (i != null) {
+      _radiusLabel = formatSearchRadiusKm(parseSearchRadiusKm(i.radiusLabel));
+    }
+  }
 
   @override
   void dispose() {
@@ -64,11 +113,58 @@ class _FiltersSheetState extends State<FiltersSheet> {
       _areaMinController.clear();
       _areaMaxController.clear();
       _fixAndFlip = true;
+      _radiusLabel = '5 km';
     });
+    widget.onCleared?.call();
+  }
+
+  int _computeActiveFilterCount() {
+    int c = 0;
+    if (_roiValue > 0) c++;
+    if (_locationController.text.trim().isNotEmpty) c++;
+    if (_selectedTipologia != null) c++;
+    if (_areaMinController.text.trim().isNotEmpty ||
+        _areaMaxController.text.trim().isNotEmpty) {
+      c++;
+    }
+    const fullMin = _priceMinLimit;
+    const fullMax = _priceMaxLimit;
+    if (_priceMin > fullMin || _priceMax < fullMax) c++;
+    if (!_fixAndFlip) c++;
+    return c == 0 ? 1 : c;
+  }
+
+  void _pickRadius() {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (ctx) => SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: kSearchRadiusKmOptions
+              .map(
+                (km) => ListTile(
+                  title: Text(formatSearchRadiusKm(km)),
+                  onTap: () {
+                    setState(() => _radiusLabel = formatSearchRadiusKm(km));
+                    Navigator.of(ctx).pop();
+                  },
+                ),
+              )
+              .toList(),
+        ),
+      ),
+    );
   }
 
   void _aplicar() {
-    Navigator.of(context).pop();
+    Navigator.of(context).pop(
+      AppliedSearchFilters(
+        locationLabel: _locationController.text.trim(),
+        radiusLabel: _radiusLabel,
+        activeFilterCount: _computeActiveFilterCount(),
+        resultsCount: 43,
+      ),
+    );
   }
 
   @override
@@ -237,25 +333,39 @@ class _FiltersSheetState extends State<FiltersSheet> {
               ),
             ),
             const SizedBox(width: 10),
-            Container(
-              height: 44,
-              padding: const EdgeInsets.symmetric(horizontal: 14),
-              decoration: BoxDecoration(
-                color: AppColors.white,
-                border: Border.all(color: AppColors.darkBlue200, width: 1),
+            Material(
+              color: AppColors.white,
+              borderRadius: BorderRadius.circular(8),
+              child: InkWell(
+                onTap: _pickRadius,
                 borderRadius: BorderRadius.circular(8),
-              ),
-              alignment: Alignment.center,
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    l.filterRadius,
-                    style: theme.bodyMedium?.copyWith(color: AppColors.darkBlue600, fontSize: 15),
+                child: Container(
+                  height: 44,
+                  padding: const EdgeInsets.symmetric(horizontal: 14),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: AppColors.darkBlue200, width: 1),
+                    borderRadius: BorderRadius.circular(8),
                   ),
-                  const SizedBox(width: 4),
-                  const Icon(Icons.keyboard_arrow_down, color: AppColors.darkBlue600, size: 18),
-                ],
+                  alignment: Alignment.center,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        _radiusLabel,
+                        style: theme.bodyMedium?.copyWith(
+                          color: AppColors.darkBlue600,
+                          fontSize: 15,
+                        ),
+                      ),
+                      const SizedBox(width: 4),
+                      const Icon(
+                        Icons.keyboard_arrow_down,
+                        color: AppColors.darkBlue600,
+                        size: 18,
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
           ],
